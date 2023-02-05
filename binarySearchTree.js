@@ -101,6 +101,29 @@ class Tree {
         } 
         return searchNode;
     }
+
+    levelOrder(root = this.root, callback = this.toArray) {
+        let levelOrderArray = [];
+
+        if(root === null) return;
+
+        let queue = [];
+        callback(queue, root);
+
+        while(queue.length > 0) {
+            const node = queue[0];
+            callback(levelOrderArray, node.data);
+            if(node.leftNode !== null) callback(queue, node.leftNode);
+            if(node.rightNode !== null) callback(queue, node.rightNode);
+            queue.shift();
+        }
+
+        return levelOrderArray;
+    }
+
+    toArray(array, value) {
+        array.push(value);
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -125,3 +148,6 @@ tree.prettyPrint(tree.root);
 
 console.log('---------------------\nfind(5):');
 console.log(JSON.stringify(tree.find(5)));
+
+console.log('---------------------\nlevelOrder():');
+console.table(tree.levelOrder());
