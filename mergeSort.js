@@ -1,4 +1,4 @@
-function mergeSort(array) {
+export default function mergeSort(array) {
     if (array.length < 2) {
         return array;
     }
@@ -17,6 +17,7 @@ function mergeSort(array) {
             mergedArray.push(secondArray.shift());
         }
     }
+
     if (firstArray.length === 0) {
         return mergedArray.concat(secondArray);
     } else {
