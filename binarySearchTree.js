@@ -49,6 +49,41 @@ class Tree {
             }
         }
     }
+
+    delete(value) {
+        this.deleteRec(this.root, value);
+    }
+
+    deleteRec(root, value) {
+        if(root === null) return root;
+
+        if(value < root.data) {
+            root.leftNode = this.deleteRec(root.leftNode, value)
+        } else if(value > root.data) {
+            root.rightNode = this.deleteRec(root.rightNode, value)
+        } else {
+            if(root.leftNode === null) return root.rightNode;
+
+            if(root.rightNode === null) return root.leftNode;
+    
+            root.data = this.minValue(root.rightNode);
+            
+            root.rightNode = this.deleteRec(root.rightNode, root.data);
+        }
+
+        return root;
+    }
+
+    minValue(root) {
+        let min = root.data;
+
+        while(root.leftNode !== null) {
+            min = root.leftNode.data;
+            root = root.leftNode;
+        }
+
+        return min;
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -61,4 +96,12 @@ tree.prettyPrint(tree.root);
 
 console.log('---------------------\nInsert(10):');
 tree.insert(10);
+tree.prettyPrint(tree.root);
+
+console.log('---------------------\nDelete(67):');
+tree.delete(67);
+tree.prettyPrint(tree.root);
+
+console.log('---------------------\nDelete(9):');
+tree.delete(9);
 tree.prettyPrint(tree.root);
