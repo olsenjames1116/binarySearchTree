@@ -84,6 +84,23 @@ class Tree {
 
         return min;
     }
+
+    find(value) {
+        return this.findRec(this.root, value);
+    }
+
+    findRec(root, value) {
+        if(root === null) return null;
+
+        let searchNode = root;
+
+        if(value < root.data) {
+            searchNode = this.findRec(root.leftNode, value);
+        } else if(value > root.data) {
+            searchNode = this.findRec(root.rightNode, value);
+        } 
+        return searchNode;
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -94,14 +111,17 @@ console.table(tree.array);
 console.log('---------------------\nBinary search tree:');
 tree.prettyPrint(tree.root);
 
-console.log('---------------------\nInsert(10):');
+console.log('---------------------\ninsert(10):');
 tree.insert(10);
 tree.prettyPrint(tree.root);
 
-console.log('---------------------\nDelete(67):');
+console.log('---------------------\ndelete(67):');
 tree.delete(67);
 tree.prettyPrint(tree.root);
 
-console.log('---------------------\nDelete(9):');
+console.log('---------------------\ndelete(9):');
 tree.delete(9);
 tree.prettyPrint(tree.root);
+
+console.log('---------------------\nfind(5):');
+console.log(JSON.stringify(tree.find(5)));
