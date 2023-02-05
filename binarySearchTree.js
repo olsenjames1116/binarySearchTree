@@ -28,9 +28,37 @@ class Tree {
         if (node.leftNode !== null) {
           this.prettyPrint(node.leftNode, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
-      }
+    }
+
+    insert(value) {
+        this.insertRec(this.root, value);
+    }
+
+    insertRec(root, value) {
+        if(value < root.data) {
+            if(root.leftNode === null) {
+                root.leftNode = new Node(value)
+            } else {
+                this.insertRec(root.leftNode, value);
+            }
+        } else {
+            if(root.rightNode === null) {
+                root.rightNode = new Node(value);
+            } else {
+                this.insertRec(root.rightNode, value);
+            }
+        }
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+
+console.log('Sorted and non-duplicated array:');
 console.table(tree.array);
+
+console.log('---------------------\nBinary search tree:');
+tree.prettyPrint(tree.root);
+
+console.log('---------------------\nInsert(10):');
+tree.insert(10);
 tree.prettyPrint(tree.root);
