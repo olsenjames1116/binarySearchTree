@@ -20,7 +20,7 @@ class Tree {
         return node;
     }
 
-    prettyPrint(node, prefix = '', isLeft = true) {
+    prettyPrint(node = this.root, prefix = '', isLeft = true) {
         if (node.rightNode !== null) {
           this.prettyPrint(node.rightNode, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
@@ -179,6 +179,20 @@ class Tree {
 
         return depthVal + 1;
     }
+
+    isBalanced() {
+        let postorderArray = this.postorder();
+        let leftHalfHeight = this.depth(postorderArray[0]);
+
+        let levelOrderArray = this.levelOrder();
+        let rightHalfHeight = this.depth(levelOrderArray[levelOrderArray.length - 1]);
+
+        const heightDifference = Math.abs(leftHalfHeight - rightHalfHeight);
+
+        if(heightDifference > 1) return false;
+
+        return true;
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -187,19 +201,19 @@ console.log('Sorted and non-duplicated array:');
 console.table(tree.array);
 
 console.log('---------------------\nBinary search tree:');
-tree.prettyPrint(tree.root);
+tree.prettyPrint();
 
 console.log('---------------------\ninsert(10):');
 tree.insert(10);
-tree.prettyPrint(tree.root);
+tree.prettyPrint();
 
 console.log('---------------------\ndelete(67):');
 tree.delete(67);
-tree.prettyPrint(tree.root);
+tree.prettyPrint();
 
 console.log('---------------------\ndelete(9):');
 tree.delete(9);
-tree.prettyPrint(tree.root);
+tree.prettyPrint();
 
 console.log('---------------------\nfind(5):');
 console.log(JSON.stringify(tree.find(5)));
@@ -221,3 +235,6 @@ console.log(tree.height(324));
 
 console.log('---------------------\ndepth(23):');
 console.log(tree.depth(23));
+
+console.log('---------------------\nisBalanced():');
+console.log(tree.isBalanced());
