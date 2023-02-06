@@ -124,6 +124,22 @@ class Tree {
     toArray(array, value) {
         array.push(value);
     }
+
+    inorder() {
+        return this.inorderRec(this.root);
+    }
+
+    inorderRec(root, callback = this.toArray) {
+        let inorderArray = [];
+        
+        if(root === null) return [];
+
+        inorderArray = this.inorderRec(root.leftNode).concat(inorderArray);
+        callback(inorderArray, root.data);
+        inorderArray = inorderArray.concat(this.inorderRec(root.rightNode));
+
+        return inorderArray;
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -151,3 +167,6 @@ console.log(JSON.stringify(tree.find(5)));
 
 console.log('---------------------\nlevelOrder():');
 console.table(tree.levelOrder());
+
+console.log('---------------------\ninorder():');
+console.table(tree.inorder());
