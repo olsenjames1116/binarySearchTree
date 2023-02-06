@@ -30,37 +30,29 @@ class Tree {
         }
     }
 
-    insert(value) {
-        this.insertRec(this.root, value);
-    }
-
-    insertRec(root, value) {
+    insert(value, root = this.root) {
         if(value < root.data) {
             if(root.leftNode === null) {
                 root.leftNode = new Node(value)
             } else {
-                this.insertRec(root.leftNode, value);
+                this.insert(value, root.leftNode);
             }
         } else {
             if(root.rightNode === null) {
                 root.rightNode = new Node(value);
             } else {
-                this.insertRec(root.rightNode, value);
+                this.insert(value, root.rightNode);
             }
         }
     }
 
-    delete(value) {
-        this.deleteRec(this.root, value);
-    }
-
-    deleteRec(root, value) {
+    delete(value, root = this.root) {
         if(root === null) return root;
 
         if(value < root.data) {
-            root.leftNode = this.deleteRec(root.leftNode, value)
+            root.leftNode = this.delete(value, root.leftNode)
         } else if(value > root.data) {
-            root.rightNode = this.deleteRec(root.rightNode, value)
+            root.rightNode = this.delete(value, root.rightNode)
         } else {
             if(root.leftNode === null) return root.rightNode;
 
@@ -68,7 +60,7 @@ class Tree {
     
             root.data = this.minValue(root.rightNode);
             
-            root.rightNode = this.deleteRec(root.rightNode, root.data);
+            root.rightNode = this.delete(root.data, root.rightNode);
         }
 
         return root;
@@ -85,19 +77,15 @@ class Tree {
         return min;
     }
 
-    find(value) {
-        return this.findRec(this.root, value);
-    }
-
-    findRec(root, value) {
+    find(value, root = this.root) {
         if(root === null) return null;
 
         let searchNode = root;
 
         if(value < root.data) {
-            searchNode = this.findRec(root.leftNode, value);
+            searchNode = this.find(value, root.leftNode);
         } else if(value > root.data) {
-            searchNode = this.findRec(root.rightNode, value);
+            searchNode = this.find(value,root.rightNode);
         } 
         return searchNode;
     }
@@ -125,49 +113,37 @@ class Tree {
         array.push(value);
     }
 
-    inorder() {
-        return this.inorderRec(this.root);
-    }
-
-    inorderRec(root, callback = this.toArray) {
+    inorder(root = this.root, callback = this.toArray) {
         let inorderArray = [];
 
         if(root === null) return inorderArray;
 
-        inorderArray = this.inorderRec(root.leftNode).concat(inorderArray);
+        inorderArray = this.inorder(root.leftNode).concat(inorderArray);
         callback(inorderArray, root.data);
-        inorderArray = inorderArray.concat(this.inorderRec(root.rightNode));
+        inorderArray = inorderArray.concat(this.inorder(root.rightNode));
 
         return inorderArray;
     }
 
-    preorder() {
-        return this.preorderRec(this.root);
-    }
-
-    preorderRec(root, callback = this.toArray) {
+    preorder(root = this.root, callback = this.toArray) {
         let preorderArray = [];
 
         if(root === null) return preorderArray;
 
         callback(preorderArray, root.data);
-        preorderArray = preorderArray.concat(this.preorderRec(root.leftNode));
-        preorderArray = preorderArray.concat(this.preorderRec(root.rightNode));
+        preorderArray = preorderArray.concat(this.preorder(root.leftNode));
+        preorderArray = preorderArray.concat(this.preorder(root.rightNode));
 
         return preorderArray;
     }
-
-    postorder() {
-        return this.postorderRec(this.root);
-    }
     
-    postorderRec(root, callback = this.toArray) {
+    postorder(root = this.root, callback = this.toArray) {
         let postorderArray = [];
 
         if(root === null) return postorderArray;
 
-        postorderArray = this.postorderRec(root.leftNode).concat(postorderArray);
-        postorderArray = postorderArray.concat(this.postorderRec(root.rightNode));
+        postorderArray = this.postorder(root.leftNode).concat(postorderArray);
+        postorderArray = postorderArray.concat(this.postorder(root.rightNode));
         callback(postorderArray, root.data);
 
         return postorderArray;
