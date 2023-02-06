@@ -131,14 +131,30 @@ class Tree {
 
     inorderRec(root, callback = this.toArray) {
         let inorderArray = [];
-        
-        if(root === null) return [];
+
+        if(root === null) return inorderArray;
 
         inorderArray = this.inorderRec(root.leftNode).concat(inorderArray);
         callback(inorderArray, root.data);
         inorderArray = inorderArray.concat(this.inorderRec(root.rightNode));
 
         return inorderArray;
+    }
+
+    preorder() {
+        return this.preorderRec(this.root);
+    }
+
+    preorderRec(root, callback = this.toArray) {
+        let preorderArray = [];
+
+        if(root === null) return preorderArray;
+
+        callback(preorderArray, root.data);
+        preorderArray = preorderArray.concat(this.preorderRec(root.leftNode));
+        preorderArray = preorderArray.concat(this.preorderRec(root.rightNode));
+
+        return preorderArray;
     }
 }
 
@@ -170,3 +186,6 @@ console.table(tree.levelOrder());
 
 console.log('---------------------\ninorder():');
 console.table(tree.inorder());
+
+console.log('---------------------\npreorder():');
+console.table(tree.preorder());
