@@ -156,6 +156,22 @@ class Tree {
 
         return preorderArray;
     }
+
+    postorder() {
+        return this.postorderRec(this.root);
+    }
+    
+    postorderRec(root, callback = this.toArray) {
+        let postorderArray = [];
+
+        if(root === null) return postorderArray;
+
+        postorderArray = this.postorderRec(root.leftNode).concat(postorderArray);
+        postorderArray = postorderArray.concat(this.postorderRec(root.rightNode));
+        callback(postorderArray, root.data);
+
+        return postorderArray;
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -189,3 +205,6 @@ console.table(tree.inorder());
 
 console.log('---------------------\npreorder():');
 console.table(tree.preorder());
+
+console.log('---------------------\npostorder():');
+console.table(tree.postorder());
