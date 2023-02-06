@@ -172,6 +172,37 @@ class Tree {
 
         return postorderArray;
     }
+
+    height(value) {
+        let node;
+
+        if(typeof value === 'number') {
+            node = this.find(value);
+            if(node === null) return null;
+        } else {
+            node = value;
+        }
+
+        if(node === null) return -1;
+
+        let leftHeight = this.height(node.leftNode);
+        let rightHeight = this.height(node.rightNode);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    depth(value, root = this.root) {
+        let depthVal = 0;
+
+        if(root === null) return null;
+
+        if(root.data === value) return 0;
+
+        if(value < root.data) depthVal = this.depth(value, root.leftNode);
+        if(value > root.data) depthVal = this.depth(value, root.rightNode);
+
+        return depthVal + 1;
+    }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -208,3 +239,9 @@ console.table(tree.preorder());
 
 console.log('---------------------\npostorder():');
 console.table(tree.postorder());
+
+console.log('---------------------\nheight(324):');
+console.log(tree.height(324));
+
+console.log('---------------------\ndepth(23):');
+console.log(tree.depth(23));
