@@ -2,7 +2,7 @@ import Node from "./node.js";
 import mergeSort from "./mergeSort.js";
 import removeDuplicates from "./removeDuplicates.js";
 
-class Tree {
+export default class Tree {
   constructor(array) {
     this.array = removeDuplicates(mergeSort(array));
     this.root = this.buildTree(this.array, 0, this.array.length - 1);
@@ -20,7 +20,7 @@ class Tree {
     return node;
   }
 
-  prettyPrint(node = this.root, prefix = "", isLeft =     true) {
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node.rightNode !== null) {
       this.prettyPrint(
         node.rightNode,
