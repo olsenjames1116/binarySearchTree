@@ -21,3 +21,5 @@ console.log(`-----------------------\nThe tree is balanced: ${tree.isBalanced()}
 console.log(`-----------------------\nLevel Order:\n[${tree.levelOrder()}]`);
 
 console.log(`-----------------------\nPreorder:\n[${tree.preorder()}]`);
+
+console.log(`-----------------------\nPostorder:\n[${tree.postorder()}]`);
