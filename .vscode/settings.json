@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["inorder", "npreorder", "postorder", "preorder", "rebalance"]
+  "cSpell.words": [
+    "inorder",
+    "npreorder",
+    "postorder",
+    "preorder",
+    "rebalance"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
 }
