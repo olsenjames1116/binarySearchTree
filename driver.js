@@ -23,3 +23,5 @@ console.log(`-----------------------\nLevel Order:\n[${tree.levelOrder()}]`);
 console.log(`-----------------------\nPreorder:\n[${tree.preorder()}]`);
 
 console.log(`-----------------------\nPostorder:\n[${tree.postorder()}]`);
+
+console.log(`-----------------------\nInorder:\n[${tree.inorder()}]`);
