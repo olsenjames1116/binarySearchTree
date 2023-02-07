@@ -8,6 +8,14 @@ class Tree {
         this.root = this.buildTree(this.array, 0, this.array.length - 1);
     }
 
+    // set array(value) {
+    //     this.array = value;
+    // }
+
+    // set root(value) {
+    //     this.root = value;
+    // }
+
     buildTree(array, start, end) {
         if(start > end) return null;
 
@@ -91,11 +99,11 @@ class Tree {
     }
 
     levelOrder(root = this.root, callback = this.toArray) {
-        let levelOrderArray = [];
+        const levelOrderArray = [];
 
         if(root === null) return;
 
-        let queue = [];
+        const queue = [];
         callback(queue, root);
 
         while(queue.length > 0) {
@@ -161,8 +169,8 @@ class Tree {
 
         if(node === null) return -1;
 
-        let leftHeight = this.height(node.leftNode);
-        let rightHeight = this.height(node.rightNode);
+        const leftHeight = this.height(node.leftNode);
+        const rightHeight = this.height(node.rightNode);
 
         return Math.max(leftHeight, rightHeight) + 1;
     }
@@ -181,17 +189,24 @@ class Tree {
     }
 
     isBalanced() {
-        let postorderArray = this.postorder();
-        let leftHalfHeight = this.depth(postorderArray[0]);
+        const postorderArray = this.postorder();
+        const leftHalfHeight = this.depth(postorderArray[0]);
 
-        let levelOrderArray = this.levelOrder();
-        let rightHalfHeight = this.depth(levelOrderArray[levelOrderArray.length - 1]);
+        const levelOrderArray = this.levelOrder();
+        const rightHalfHeight = this.depth(levelOrderArray[levelOrderArray.length - 1]);
 
         const heightDifference = Math.abs(leftHalfHeight - rightHalfHeight);
 
         if(heightDifference > 1) return false;
 
         return true;
+    }
+
+    rebalance() {
+        const inorderArray = this.inorder();
+
+        this.array = inorderArray;
+        this.root = this.buildTree(inorderArray, 0, inorderArray.length - 1);
     }
 }
 
@@ -238,3 +253,12 @@ console.log(tree.depth(23));
 
 console.log('---------------------\nisBalanced():');
 console.log(tree.isBalanced());
+
+console.log('---------------------\nUnbalanced tree:')
+tree.insert(11);
+tree.insert(12);
+tree.prettyPrint();
+
+console.log('---------------------\nrebalance():');
+tree.rebalance();
+tree.prettyPrint();
