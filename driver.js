@@ -11,4 +11,7 @@ function randomArray(length) {
     return array;
 }
 
-console.table(randomArray(30));
+const tree = new Tree(randomArray(30));
+console.log(`Array:\n[${tree.array}]`)
+console.log('-----------------------\nBinary Tree:');
+tree.prettyPrint();
