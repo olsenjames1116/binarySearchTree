@@ -15,3 +15,5 @@ const tree = new Tree(randomArray(30));
 console.log(`Array:\n[${tree.array}]`)
 console.log('-----------------------\nBinary Tree:');
 tree.prettyPrint();
+
+console.log(`-----------------------\nThe tree is balanced: ${tree.isBalanced()}`);

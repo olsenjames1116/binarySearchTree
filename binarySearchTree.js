@@ -212,55 +212,55 @@ export default class Tree {
   }
 }
 
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
-console.log("Sorted and non-duplicated array:");
-console.table(tree.array);
+// console.log("Sorted and non-duplicated array:");
+// console.table(tree.array);
 
-console.log("---------------------\nBinary search tree:");
-tree.prettyPrint();
+// console.log("---------------------\nBinary search tree:");
+// tree.prettyPrint();
 
-console.log("---------------------\ninsert(10):");
-tree.insert(10);
-tree.prettyPrint();
+// console.log("---------------------\ninsert(10):");
+// tree.insert(10);
+// tree.prettyPrint();
 
-console.log("---------------------\ndelete(67):");
-tree.delete(67);
-tree.prettyPrint();
+// console.log("---------------------\ndelete(67):");
+// tree.delete(67);
+// tree.prettyPrint();
 
-console.log("---------------------\ndelete(9):");
-tree.delete(9);
-tree.prettyPrint();
+// console.log("---------------------\ndelete(9):");
+// tree.delete(9);
+// tree.prettyPrint();
 
-console.log("---------------------\nfind(5):");
-console.log(JSON.stringify(tree.find(5)));
+// console.log("---------------------\nfind(5):");
+// console.log(JSON.stringify(tree.find(5)));
 
-console.log("---------------------\nlevelOrder():");
-console.table(tree.levelOrder());
+// console.log("---------------------\nlevelOrder():");
+// console.table(tree.levelOrder());
 
-console.log("---------------------\ninorder():");
-console.table(tree.inorder());
+// console.log("---------------------\ninorder():");
+// console.table(tree.inorder());
 
-console.log("---------------------\npreorder():");
-console.table(tree.preorder());
+// console.log("---------------------\npreorder():");
+// console.table(tree.preorder());
 
-console.log("---------------------\npostorder():");
-console.table(tree.postorder());
+// console.log("---------------------\npostorder():");
+// console.table(tree.postorder());
 
-console.log("---------------------\nheight(324):");
-console.log(tree.height(324));
+// console.log("---------------------\nheight(324):");
+// console.log(tree.height(324));
 
-console.log("---------------------\ndepth(23):");
-console.log(tree.depth(23));
+// console.log("---------------------\ndepth(23):");
+// console.log(tree.depth(23));
 
-console.log("---------------------\nisBalanced():");
-console.log(tree.isBalanced());
+// console.log("---------------------\nisBalanced():");
+// console.log(tree.isBalanced());
 
-console.log("---------------------\nUnbalanced tree:");
-tree.insert(11);
-tree.insert(12);
-tree.prettyPrint();
+// console.log("---------------------\nUnbalanced tree:");
+// tree.insert(11);
+// tree.insert(12);
+// tree.prettyPrint();
 
-console.log("---------------------\nrebalance():");
-tree.rebalance();
-tree.prettyPrint();
+// console.log("---------------------\nrebalance():");
+// tree.rebalance();
+// tree.prettyPrint();
